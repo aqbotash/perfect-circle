@@ -22,10 +22,12 @@ class CanvasDrawing {
       this.threshold = 7000;
       this.lastMoveTime = 0;
       this.startPoint = null;
+      this.lastScore = 0;
       this.ctx.strokeStyle = 'green';
       this.canvas.addEventListener("mousedown", this.startDrawing.bind(this));
       this.canvas.addEventListener("mouseup", this.stopDrawing.bind(this));
       this.canvas.addEventListener("mousemove", this.drawLine.bind(this));
+      this.canvas.addEventListener("mouseleave", this.warning.bind(this));
       window.addEventListener("resize", this.resizeCanvas.bind(this));
       this.resizeCanvas();
     }
@@ -36,6 +38,7 @@ class CanvasDrawing {
       this.startPoint = { x: e.clientX, y: e.clientY };
       this.ctx.clearRect(0, 0, canvas.width, canvas.height);
       this.lastMoveTime = Date.now();
+      span5.innerHTML =" ";
       console.log('tHIS IS OFFSETX');
     }
   
@@ -88,9 +91,12 @@ class CanvasDrawing {
 
 
         //setting the percentage
-        span1.innerHTML = Math.floor(returnValue/10); 
+        span1.innerHTML = Math.floor(returnValue/10);
+        span1.style.color = color; 
         span2.innerHTML = ((returnValue*10)%100-(returnValue*10)%10)/10;
+        span2.style.color = color;
         span3.innerHTML = (returnValue*10)%10;
+        span3.style.color = color;
         // var circlecheck = this.dotCheck.bind(this);
         // this.isDrawing = circlecheck(startX, startY);
         
@@ -111,10 +117,20 @@ class CanvasDrawing {
 
       }
     }
-
+    warning(){
+      this.isDrawing = false;
+      if(span5.innerHTML===' '){
+        span5.innerHTML = "DRAW A FULL CIRCLE";
+      }
+    }
     stopDrawing() {
       this.isDrawing = false;
       this.startPoint = null;
+      const currScore =  this.percentage();
+      if(currScore>this.lastScore){
+        span5.innerHTML = `Best score: ` + currScore;
+        this.lastScore = currScore;
+      }
       this.arr = [];
     }
 

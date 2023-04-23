@@ -37,7 +37,6 @@ body{
     justify-content:center;
     align-items:center;
 }
-
 #center-btn{
     height:15px;
     width:15px;
@@ -47,11 +46,8 @@ body{
     transform: translate(50%, 50%);
     border-radius:100%;
 }
-
-
-
 span{
-    color:white;
+    color: white;
 }
 .span1{
     position: absolute;
@@ -85,7 +81,7 @@ span{
     position: absolute;
     left: 44%;
     top: 58%;
-    transform: translate(44%, 58%);
+    /* transform: translate(44%, 58%); */
     font-size: 30px;
 }
 /* @media (max-width: 768px) {
